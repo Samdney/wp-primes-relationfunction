@@ -1,0 +1,151 @@
+\documentclass{amsart}
+\usepackage{footnote}
+\usepackage{amssymb}
+\usepackage{url}
+%\usepackage{graphicx}
+
+% ======================================================================
+\begin{document}
+% ======================================================================
+\title[NOTES: Primes Relation Function]{NOTES: Primes\\
+- \\
+Relation Function for Recursive Prime Number computation}
+
+\author{Carolin Z\"obelein}
+\urladdr{http://www.carolin-zoebelein.de}
+\email{contact@carolin-zoebelein.de, PGP: D4A7 35E8 D47F 801F 2CF6 2BA7 927A FD3C DE47 E13B}
+\thanks{wp-primes-relationfunction (old name: notes00001primes00001), CC BY-ND 3.0 DE}
+
+\subjclass[2010]{Primary 11N05}
+\date{October 11, 2015}
+
+\dedicatory{My notes are only sketches. Not final results! They are to be a basis for common discussion in terms of community based research.}
+% ======================================================================
+\begin{abstract}
+	In this notes we will discuss some problems about the relation function for recursive prime number computation. This are: Limitation by constraint and limitation by the permitted $\beta$ range.
+\end{abstract}
+
+\maketitle
+% ======================================================================
+% Introduction
+\section{Introduction}
+\label{s:introduction}
+% ----------------------------------------------------------------------
+In the following notes I will show how you can receive $\beta_{i}$ and $\beta_{j}$ for each possible case of $\left(\alpha_{i}, \alpha_{j}\right)$, that you are always able to find exactly all $\beta_{i}$ and $\beta_{j}$ on the permitted range and so to solve problems of my work \cite{CaZoeb} on the way to describe all prime numbers.
+% ======================================================================
+% Problems
+\section{Repetition: Problems}
+\label{s:problems}
+% ----------------------------------------------------------------------
+From \cite{CaZoeb} we know that we are able to describe primes on a certain range $\mathcal{R}^{\pm}:=[a^{\pm},b^{\pm}]$ by intersections of equations of the form
+\begin{equation}
+	\tilde{\gamma}_{\alpha_{i}}=\left(6\alpha_{i} \pm 1\right)\beta_{i} + \kappa_{i}.
+\label{eq:gen}\end{equation}
+If we have, for example, the same sign case
+\begin{equation}
+	0 = \left(6\alpha_{i} \pm 1\right)\beta_{i} - \left(6\alpha_{j} \pm 1\right)\beta_{j} + \kappa_{i\left(\alpha_{i}, \chi_{i}\right)} - \kappa_{j\left(\alpha_{j}, \chi_{j}\right)},
+\label{eq:int}\end{equation}
+which we can subsitute in two ways. First with $\alpha_{j} := \alpha_{i} + \Delta\alpha$, $\Delta\alpha \in \mathbb{N}$,
+\begin{equation}
+	0 = \left(6\alpha_{i} \pm 1\right)\left(\beta_{i} - \beta_{j}\right) - 6\Delta\alpha\beta_{j} + \kappa_{i\left(\alpha_{i}, \chi_{i}\right)} - \kappa_{j\left(\alpha_{j}, \chi_{j}\right)}
+\label{eq:sub_alphaj}\end{equation}
+with the constraint
+\begin{equation}
+	\Delta\alpha < 6\alpha_{i} \pm 1,
+\label{eq:sub_alphaj_cons}\end{equation}
+for the solving equation for $\beta_{i}$ and $\beta_{j}$ in \cite{CaZoeb}. Second with $\alpha_{i} := \alpha_{j} - \Delta\alpha$, $\Delta\alpha \in \mathbb{N}:\Delta\alpha < \alpha_{j}$,
+\begin{equation}
+	0 = \left(6\alpha_{j} \pm 1\right)\left(\beta_{i} - \beta_{j}\right) - 6\Delta\alpha\beta_{i} + \kappa_{i\left(\alpha_{i}, \chi_{i}\right)} - \kappa_{j\left(\alpha_{j}, \chi_{j}\right)}
+\label{eq:sub_alphai}\end{equation}
+with the constraint (\ref{eq:sub_alphaj_cons}) and which comprised of course 
+\begin{equation}
+	\Delta\alpha < 6\alpha_{j} \pm 1,
+\label{eq:sub_alphai_cons}\end{equation}
+for the solving equation for $\beta_{i}$ and $\beta_{j}$, too.\\
+Problem one:\\
+The using of the solving equations for $\beta_{i}$ and $\beta_{j}$ is limited by the constraint. But during recursion you have also cases with bigger $\Delta\alpha$'s of course.\\
+Problem two:\\
+The values for $\beta_{i}$ and $\beta_{j}$ which you receive by solving equations are not automatically limited on the current permitted range for them. How we can generate only permitted $\beta$ values?\\
+If we are able to solve this problems we will know every time during each recursion step all what we have to know to make the next recursion step.
+% ======================================================================
+% Intersection of two one-prime equations
+\section{Intersection of two one-prime equations}
+\label{s:oneprime}
+% ----------------------------------------------------------------------
+At first we look the case that every equation which we use for intersection has only one prime as factor before $\beta$ like in (\ref{eq:gen}). This case (\ref{eq:int}) we have, for example, for the absolutely first step of the infinite number of recursion steps.\\
+For the absolutely first step we have no problem to use equation (4.21) from \cite{CaZoeb} because we have $\Delta \alpha = 1$ between $\alpha_{i}$ and $\alpha_{j}$.\\
+After, for example, the intersection between $\tilde{\gamma}_{1}=5\beta_{1} + \kappa_{1\left(1,\chi_{1}\right)}$ and $\tilde{\gamma}_{2}=11\beta_{2} + \kappa_{2\left(2,\chi_{2}\right)}$, we receive an equation which can discribe all $\gamma$'s which belongs to numbers of the set $O_{-}$ which neither integer divisible by $5$ nor by $11$ in the $\gamma$-range $\mathcal{R}_{1}:=[1,6\cdot 11 - 1]=[1,65]$, depending on the used $\kappa$'s. All this $\gamma$'s we now know, can be used for the next step.\\
+At first we will make a simplification (For the true recursion this is not correct. It's only used to make the explanation easier here). We will make the intersection between $\tilde{\gamma}_{1}=5\beta_{1} + \kappa_{1\left(1,\chi_{1}\right)}$ and $\tilde{\gamma}_{60}=\left(6\cdot 60 - 1\right)\beta_{60} + \kappa_{60\left(60,\chi_{60}\right)} = 359\beta_{60} + \kappa_{60\left(60,\chi_{60}\right)}$. We assume that we use $\chi_{1} = 1$ for generating $60$ from the step before, we receive $\tilde{\gamma} = 60$. We receive all $6\gamma - 1$ numbers which has a distance of $-1$ to all integer multiple of $5$, so that we are always able to map the problem on the permitted range for \ref{eq:sub_alphaj_cons}. We always know all what we need for this. We can easy write
+\begin{equation}\begin{split}
+	0 & = \left(6\alpha_{i} - 1\right)\left(\beta_{i} - \beta_{j}\right) - 6\Delta\alpha\beta_{j} + \kappa_{i\left(\alpha_{i},\chi_{i}\right)} - \kappa_{j\left(\alpha_{j},\chi_{j}\right)} \\
+	& = 5\left(\beta_{1} - \beta_{60}\right) - 6\cdot 59 \beta_{60} + \kappa_{1\left(\alpha_{1},\chi_{1}\right)} - \kappa_{60\left(60,\chi_{60}\right)} \\
+	& = 5\left(\beta_{1} - \beta_{60}\right) - 6\cdot 4 \beta_{60} + \kappa_{1\left(\alpha_{1},\chi_{1}\right)} - \kappa_{60\left(60,\chi_{60}\right)}.
+\end{split}\label{eq:writeeasy}\end{equation}
+Since we have $60$ generated in the first recursion step with $\chi_{1} = 1$ we also know this and we are able to use this information like in (\ref{eq:writeeasy}). So the constraint \ref{eq:sub_alphaj_cons} is never a problem. Since $\kappa$ is only depending on $\alpha$ and $\chi$ we always know our final, completely shorted and smallest, $\Delta \alpha$. We are always able to write the computation in this range in a very easy way.
+% ======================================================================
+% Intersection of two more-prime equations
+\section{Intersection of two more-prime equations}
+\label{s:moreprime}
+% ----------------------------------------------------------------------
+The simplification above was not the true case which we have for our prime number recursion. Here we have (for example the case above for $O_{-}$)
+\begin{equation}
+	0 = \prod_{k=1}^{m}\left(6\alpha_{i_{k}} - 1\right)Y_{i_{k\circ\cdots}} - \left(6\alpha_{j} - 1\right)\beta_{j} + \kappa_{i_{k\circ\cdots}\left(\alpha_{i_{k}}, \cdots, \chi_{i_{k}, \cdots}\right)} - \kappa_{j\left(\alpha_{j},\chi_{j}\right)}.
+\label{eq:moreprimes}\end{equation}
+In the section above we recognized that we always know the completely shorted $\Delta\alpha$ value between $6\alpha_{i} \pm 1$ and $6\alpha_{j} \pm 1$. But now we have the product of $6\alpha_{i_{k}} \pm 1$. What is here the searched $\Delta\alpha$ between this product and $6\alpha_{j} \pm 1$? That's not so easy to answer and of course not only the product of each $\Delta\alpha_{i_{k}}$ to $\alpha_{j}$. We will also see that we don't need this $\Delta\alpha$ of the product to $\alpha_{j}$. We only need all smallest $\Delta\alpha_{i_{k}}$ between each $6\alpha_{i_{k}} \pm 1$ and $6\alpha_{j} \pm 1$.\\
+For (\ref{eq:moreprimes}) we can also write
+\begin{align}\begin{split}
+	0 = & \prod_{k=2}^{m}\left(6\alpha_{i_{k}} - 1\right)Y_{i_{k\circ\cdots}} \\
+	& \, \underbrace{- \left(6\alpha_{i_{1}} - 1\right)^{-1}\left(\left(6\alpha_{j} - 1\right)\beta_{j} - \left(\kappa_{i_{k\circ\cdots}\left(\alpha_{i_{k}}, \cdots, \chi_{i_{k}, \cdots}\right)} - \kappa_{j\left(\alpha_{j},\chi_{j}\right)}\right)\right)}_{=:Y_{i_{1}}}.
+\end{split}\label{eq:moreprimes_s1}\end{align}
+Since $Y_{i_{1}}$ has to be an integer value we have for $Y_{i_{1}}$ the case from the section above with the intersection of only one-prime equations. For $\beta_{j}$ we will receive a solution which looks like the following
+\begin{equation}
+	\beta_{j} = \left(6\alpha_{i_{1}} - 1\right)Y_{j \circ i_{1}} + C_{j \circ i_{1}},
+\label{eq:gen_solYji1}\end{equation}
+with $C_{j \circ i_{1}} \in \mathbb{Z}$. Now we have
+\begin{equation}\begin{split}
+	0 & = \prod_{k=2}^{m}\left(6\alpha_{i_{k}} - 1\right)Y_{i_{k\circ\cdots}} - \left(6\alpha_{j} - 1\right)Y_{j \circ i_{1}} - \tilde{C}_{j \circ i_{1}},
+\end{split}\label{eq:moreprimes_s2}\end{equation}
+with $\tilde{C}_{j \circ i_{1}} \in \mathbb{Z}$. We see now we can do the same for $6\alpha_{i_{2}} - 1$ and so on. That we are able to generate the final $Y_{i_{k}\circ \cdots}$ and $\beta_{j}$ in this way follows from commutativity of intersection computation.\\
+Since $\alpha_{j}$ was generated just by the equations with $\alpha_{i_{k}}$ in each calculation step we know our $\Delta \alpha_{i_{k}}$.\\
+% ======================================================================
+% Searching for valid beta's
+\section{Searching for valid $\beta$'s}
+\label{s:smallestbeta}
+% ----------------------------------------------------------------------
+Now the final problem is to find the $\beta$ solutions which are only within the current permitted range. From \cite{CaZoeb} we know for the substitution $\alpha_{j} = \alpha_{i} + \Delta\alpha$, equation (4.21), 
+\begin{equation}
+	\beta_{j}^{\Delta\alpha} = \left(6\alpha_{i} \pm 1\right)Y_{j\circ i} \mp \left(\kappa_{i\left(\alpha_{i},\chi_{i}\right)} - \kappa_{j\left(\alpha_{j}, \chi_{j}\right)}\right)\underbrace{\alpha_{i}\prod_{k=2}^{\Delta\alpha}\left(1\pm\frac{6}{k}\alpha_{i}\right)}_{\left(*\right)},
+\label{eq:subalphaj_sol}\end{equation}
+and for the substitution $\alpha_{i} = \alpha_{j} - \Delta\alpha$, equation (4.24),
+\begin{equation}
+	\beta_{i}^{\Delta\alpha} = \left(6\alpha_{j} \pm 1\right)Y_{j\circ i} \mp \left(\kappa_{i\left(\alpha_{i},\chi_{i}\right)} - \kappa_{j\left(\alpha_{j},\chi_{j}\right)}\right)\underbrace{\alpha_{j}\prod_{k=2}^{\Delta\alpha}\left(1\pm\frac{6}{k}\alpha_{j}\right)}_{\left(**\right)}.
+\label{eq:subalphai_sol}\end{equation}
+Problem, (*) and (**) not automatically generate $\beta$ values in the permitted range and it's not easy to rewrite this equations so that we receive our smallest positive values. Hence, we have to find an other solution for our problem.\\
+We are able to solve the problem in the following way: During all intersections which are necessary for one recursion step, we haven't consider the contraint for each $\beta$. Even in the final result of the recursion step we have to find the permitted range for $Y$. For example, we assume we have for step $s$ the prime numbers $p_{1}, \dots, p_{n}: p_{1} < p_{2} < \cdots < p_{n-1} < p_{n}$, $n \in \mathbb{N}$ which we already know from step $s-1$. We write down the intersection for all of this prime numbers and receive
+\begin{equation}
+	\gamma = \prod_{k=1}^{n}p_{k}Y_{n \circ n-1 \circ \cdots \circ 2 \circ 1} + p_{n}\left(\kappa_{n-1 \circ \cdots \circ 2 \circ 1} - \kappa_{n}\right)C_{n} + \kappa_{n}
+\label{eq:smallest_beta_v1}\end{equation}
+following from
+\begin{equation}
+	Y_{n} = \prod_{i=1}^{n-1}p_{i}Y_{n \circ n-1 \circ \cdots \circ 2 \circ 1} + \left(\kappa_{n-1 \circ \cdots \circ 2 \circ 1} - \kappa_{n}\right)C_{n}
+\label{eq:smallest_beta_v1_beta}\end{equation}
+or
+\begin{equation}
+	\gamma = \prod_{k=1}^{n}p_{k}Y_{n \circ n-1 \circ \cdots \circ 2 \circ 1} + \prod_{i=1}^{n-1}p_{i}\left(\kappa_{n-1 \circ \cdots \circ 2 \circ 1} - \kappa_{n}\right)C_{n-1 \circ \cdots \circ 2 \circ 1} + \kappa_{n-1 \circ \cdots \circ 2 \circ 1},
+\label{eq:smallest_beta_v2}\end{equation}
+following from
+\begin{equation}
+	Y_{n-1\circ \cdots \circ 2 \circ 1} = p_{n}Y_{n \circ n-1 \circ \cdots \circ 2 \circ 1} + \left(\kappa_{n-1 \circ \cdots \circ 2 \circ 1} - \kappa_{n}\right)C_{n-1 \circ \cdots \circ 2 \circ 1}.
+\label{eq:smallest_beta_v2_beta}\end{equation}
+Which solution we receive is depending which of our two intersection equations we use in each substep for the next substep. We know, that for the largest $p_{n}$ only $Y_{n} := \beta_{n} = 1$ is permitted. That follows from the definition of the permitted range for the final $\gamma$ set in each recursion step. With (\ref{eq:smallest_beta_v1_beta}) follows the condition
+\begin{equation}
+	Y_{n \circ n-1 \circ \cdots \circ 2 \circ 1} = \left(\prod_{i=1}^{n-1}p_{i}\right)^{-1}\left(1 - \left(\kappa_{n-1 \circ \cdots \circ 2 \circ 1} - \kappa_{n}\right)C_{n}\right).
+\label{eq:condY1}\end{equation}
+For this condition we have to look at $1-\left(\kappa_{n-1 \circ \cdots \circ 2 \circ 1} - \kappa_{n}\right)C_{n}$. How this expression looks like in detail is depending how we make our intersection order. In particular in consideration of the results of the preceding section. The question is "Exist possibilities to use an intersection order to make the solution of condition (\ref{eq:condY1}) as easy as possible?"\\
+Details will be discussed in the next notes about prime numbers.
+% ======================================================================
+% Bibliography
+\bibliographystyle{amsplain}
+\bibliography{wp-primes-relationfunction}
+% ======================================================================
+\end{document}
